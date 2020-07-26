@@ -28,7 +28,8 @@ class ArticlesController < ApplicationController
     end
 
     def update
-      @article = Article.find(params["id"])
+      article_id = params["id"]
+      @article = Article.find(article_id)
       @article.title = params["article"]["title"]
       @article.text = params["article"]["text"]
    
