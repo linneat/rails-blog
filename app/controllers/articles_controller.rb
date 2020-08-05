@@ -50,9 +50,15 @@ class ArticlesController < ApplicationController
       @article.text = params["article"]["text"]
    
       if @article.save
-        redirect_to @article
+        respond_to do |format|
+          format.html { redirect_to @article }
+          format.json { render json: @article }
+        end
       else
-        render 'edit'
+        respond_to do |format|
+          format.html { render 'edit' }
+          format.json { render status: :bad_request }
+        end        
       end
     end
 
