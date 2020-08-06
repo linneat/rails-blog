@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
         else
           respond_to do |format|
             format.html { render 'new' }
-            format.json { render status: :bad_request }
+            format.json { render body: nil, status: :bad_request }
           end
         end
     end
@@ -57,7 +57,7 @@ class ArticlesController < ApplicationController
       else
         respond_to do |format|
           format.html { render 'edit' }
-          format.json { render status: :bad_request }
+          format.json { render body: nil, status: :bad_request }
         end        
       end
     end
@@ -66,6 +66,9 @@ class ArticlesController < ApplicationController
     def destroy
         @article = Article.find(params["id"])
         @article.destroy
-        redirect_to articles_path
+        respond_to do |format|
+          format.html { redirect_to articles_path }
+          format.json { render body: nil, status: :ok }
+        end 
      end
 end
