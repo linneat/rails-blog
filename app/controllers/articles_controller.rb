@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+
+  http_basic_authenticate_with name: ENV.fetch("APP_USERNAME").strip, password: ENV.fetch("APP_PASSWORD").strip, except: [:index, :show]
+
     def index
         @articles = Article.all
        
